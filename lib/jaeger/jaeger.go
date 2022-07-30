@@ -22,6 +22,7 @@ func NewJaeger(name string, config interfaces.JaegerConfig) interfaces.Jaeger {
 }
 
 func (j *Jaeger) InitTracer() (opentracing.Tracer, io.Closer) {
+	url := fmt.Sprintf("%s:%s", j.config.Host, j.config.Port)
 	cfg := &config.Configuration{
 		ServiceName: j.name,
 		Sampler: &config.SamplerConfig{
@@ -30,7 +31,7 @@ func (j *Jaeger) InitTracer() (opentracing.Tracer, io.Closer) {
 		},
 		Reporter: &config.ReporterConfig{
 			LogSpans:           j.config.LogSpan,
-			LocalAgentHostPort: fmt.Sprintf(":%s", j.config.Endpoint),
+			LocalAgentHostPort: url,
 		},
 	}
 	tracer, closer, err := cfg.NewTracer(config.Logger(jaeger.StdLogger))

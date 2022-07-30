@@ -10,8 +10,9 @@ import (
 func main() {
 	jaeger := lib.NewLib()
 	_, closer := jaeger.LoadJaeger("Module", interfaces.JaegerConfig{
-		Endpoint: "6831",
-		LogSpan:  true,
+		Host:    "0.0.0.0",
+		Port:    "6831",
+		LogSpan: true,
 	}).InitTracer()
 
 	defer closer.Close()

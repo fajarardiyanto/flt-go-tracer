@@ -10,10 +10,11 @@ type Tracing interface {
 }
 
 type JaegerConfig struct {
-	Enable   bool
-	Url      string
-	Endpoint string
-	LogSpan  bool
+	Enable  bool
+	Url     string
+	Host    string
+	Port    string
+	LogSpan bool
 }
 
 type Jaeger interface {
